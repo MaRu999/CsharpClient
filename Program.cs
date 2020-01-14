@@ -11,7 +11,7 @@ namespace csharpclient
             return true;
         }
         static void consoleRun(RestClient client) {
-            Console.WriteLine("Please enter the search parameters (Hit enter if you do not wish to search for a parmeter): ");
+            Console.WriteLine("Please enter the search parameters (Hit enter if you do not wish to search for a parameter): ");
             Console.WriteLine("event name: ");
             string queryString = "";
             string a = Console.ReadLine();
@@ -61,8 +61,18 @@ namespace csharpclient
         }
         static void Main(string[] args)
         {
-            RestClient client =  new RestClient("http://localhost:8082");
+
             Console.WriteLine("Welcome to Team B's C# client for Rest.");
+            Console.WriteLine("Enter r or R to start on server, otherwise is started locally.");
+            String remote = Console.ReadLine();
+            String adress = "http://localhost:8082";
+            if(remote.Equals("r") || remote.Equals("R")) {
+                Console.WriteLine("Using remote");
+                adress = "http://10.0.51.91:8082";
+            } else {
+                Console.WriteLine("Using localhost");
+            }
+            RestClient client =  new RestClient(adress);
             consoleRun(client);        
             Console.WriteLine("Press any key to stop application.");
             Console.ReadKey();
